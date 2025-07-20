@@ -1,6 +1,9 @@
 CREATE TABLE IF NOT EXISTS clientes (
-  id SERIAL PRIMARY KEY,
-  nombre TEXT NOT NULL,
-  email TEXT NOT NULL,
-  creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100),
+    email VARCHAR(100)
 );
+
+INSERT INTO clientes (nombre, email) VALUES
+('Ana', 'ana@example.com'),
+('Luis', 'luis@example.com');

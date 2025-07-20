@@ -9,10 +9,11 @@
     "database.dbname": "testdb",
     "database.server.name": "dbserver1",
     "table.include.list": "public.clientes",
-    "plugin.name": "pgoutput",
+    "plugin.name": "wal2json",
     "slot.name": "debezium_slot",
     "publication.name": "debezium_publication",
     "database.history.skip.unparseable.ddl": "true",
-    "slot.drop.on.stop": "true"
+    "slot.drop.on.stop": "true",
+    "topic.prefix": "dbserver1"
   }
 }

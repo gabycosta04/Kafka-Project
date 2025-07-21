@@ -1,47 +1,63 @@
 from confluent_kafka import Consumer
+import pandas as pd
 import json
+from datetime import datetime
+from tabulate import tabulate
 
 TOPIC = "pgserver1.public.clientes"
+group_id = f"python-consumer-{datetime.now().strftime('%Y%m%d%H%M%S')}"
 
 conf = {
     'bootstrap.servers': 'localhost:9092',
-    'group.id': 'python-consumer-group2',
-    'auto.offset.reset': 'earliest'  # Cambiá a 'latest' si no querés procesar todo el historial
+    'group.id': group_id,
+    'auto.offset.reset': 'earliest'
 }
 
 consumer = Consumer(conf)
-consumer.subscribe([TOPIC])
+consumer.subscribe([TOPIC]) #aca tenemos los mensajes a consumir, donde nos suscribimos a un topic especifico
 
-print(f"🟢 Escuchando eventos del topic '{TOPIC}'...\n")
+eventos = []
+
+print("⏳ Cargando eventos desde Kafka...")
 
 try:
     while True:
         msg = consumer.poll(1.0)
         if msg is None:
-            continue
+            continue  # No hay más mensajes
         if msg.error():
             print("❌ Error:", msg.error())
             continue
 
         try:
             data = json.loads(msg.value().decode('utf-8'))
-            payload = data.get('payload', {})
+            payload = data.get("payload", {})
 
-            before = json.dumps(payload.get('before'), indent=2)
-            after = json.dumps(payload.get('after'), indent=2)
-            source = json.dumps(payload.get('source'), indent=2)
+            op = payload.get("op")
+            ts_ms = payload.get("ts_ms")
 
-            print("🔹 EVENTO ---------------------------")
-            print(f"🟥 BEFORE:\n{before}")
-            print(f"🟩 AFTER:\n{after}")
-            print(f"🛰️  SOURCE:\n{source}\n")
+            registro = payload.get("after") or payload.get("before") or {}
+            
+
+            eventos.append({
+                "operacion": op,
+                "id": registro.get("id"),
+                "nombre": registro.get("nombre"),
+                "email": registro.get("email"),
+                "timestamp": datetime.fromtimestamp(ts_ms / 1000.0) if ts_ms else None
+            })
+
+            df = pd.DataFrame(eventos)
+            df["timestamp"] = pd.to_datetime(df["timestamp"])
+            print(tabulate(df.tail(1), headers='keys', tablefmt='fancy_grid', showindex=False))
+
 
         except Exception as e:
             print(f"⚠️  Error procesando mensaje: {e}")
-            print("Contenido bruto:", msg.value())
+            print("📦 RAW:", msg.value())
 
 except KeyboardInterrupt:
-    print("\n🛑 Detenido por el usuario")
+    print("\n🛑 Detenido por el usuario.")
 
 finally:
     consumer.close()

@@ -3,6 +3,9 @@ import pandas as pd
 import json
 from datetime import datetime
 from tabulate import tabulate
+from shared_data import agregar_evento, obtener_dataframe
+
+
 
 TOPIC = "pgserver1.public.clientes"
 group_id = f"python-consumer-{datetime.now().strftime('%Y%m%d%H%M%S')}"
@@ -16,7 +19,6 @@ conf = {
 consumer = Consumer(conf)
 consumer.subscribe([TOPIC]) #aca tenemos los mensajes a consumir, donde nos suscribimos a un topic especifico
 
-eventos = []
 
 print("⏳ Cargando eventos desde Kafka...")
 
@@ -38,8 +40,8 @@ try:
 
             registro = payload.get("after") or payload.get("before") or {}
             
-
-            eventos.append({
+            
+            agregar_evento({
                 "operacion": op,
                 "id": registro.get("id"),
                 "nombre": registro.get("nombre"),
@@ -47,7 +49,7 @@ try:
                 "timestamp": datetime.fromtimestamp(ts_ms / 1000.0) if ts_ms else None
             })
 
-            df = pd.DataFrame(eventos)
+            df = obtener_dataframe()
             df["timestamp"] = pd.to_datetime(df["timestamp"])
             print(tabulate(df.tail(1), headers='keys', tablefmt='fancy_grid', showindex=False))
 

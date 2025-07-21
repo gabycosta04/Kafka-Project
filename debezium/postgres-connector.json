@@ -7,13 +7,12 @@
     "database.user": "postgres",
     "database.password": "postgres",
     "database.dbname": "testdb",
-    "database.server.name": "dbserver1",
+    "topic.prefix": "pgserver1",
     "table.include.list": "public.clientes",
-    "plugin.name": "wal2json",
+    "plugin.name": "pgoutput",
     "slot.name": "debezium_slot",
-    "publication.name": "debezium_publication",
-    "database.history.skip.unparseable.ddl": "true",
-    "slot.drop.on.stop": "true",
-    "topic.prefix": "dbserver1"
+    "publication.name": "debezium_pub",
+    "tombstones.on.delete": "false",
+    "include.schema.changes": "false"
   }
 }

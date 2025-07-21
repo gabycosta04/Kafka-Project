@@ -7,3 +7,5 @@ CREATE TABLE IF NOT EXISTS clientes (
 INSERT INTO clientes (nombre, email) VALUES
 ('Ana', 'ana@example.com'),
 ('Luis', 'luis@example.com');
+('Cristian', 'cristian@example.com'),
+('Gabriel', 'gabriel@example.com');

@@ -5,7 +5,7 @@ from datetime import datetime
 from tabulate import tabulate
 
 TOPIC = "pgserver1.public.clientes"
-group_id = f"python-consumeri-{datetime.now().strftime('%Y%m%d%H%M%S')}"
+group_id = f"python-consumer-{datetime.now().strftime('%Y%m%d%H%M%S')}"
 
 conf = {
     'bootstrap.servers': 'localhost:9092',
@@ -61,3 +61,4 @@ except KeyboardInterrupt:
 
 finally:
     consumer.close()
+    print("✅ Consumo finalizado.")

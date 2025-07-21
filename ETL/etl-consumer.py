@@ -5,7 +5,7 @@ TOPIC = "pgserver1.public.clientes"
 
 conf = {
     'bootstrap.servers': 'localhost:9092',
-    'group.id': 'python-consumer-group',
+    'group.id': 'python-consumer-group2',
     'auto.offset.reset': 'earliest'  # Cambiá a 'latest' si no querés procesar todo el historial
 }
 

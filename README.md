@@ -124,13 +124,13 @@ Diseñar un flujo de procesamiento en tiempo real que:
 ## 3️⃣ Paso 3: Crear tabla y datos en BD Origen.
 - El siguiente paso es conectarnos a nuestra base de datos y tirar consultas, para eso podemos hacerlo de dos formas...
   - Desde la bash, debemos tirar el comando, donde te pedira que ingreses la contraseña:
-  ```bash
-      psql -h localhost -U postgres -d testdb
-  ```
-  ![PSQL](img/PSQL1.jpeg)
+    ```bash
+        psql -h localhost -U postgres -d testdb
+    ```
+    ![PSQL](img/PSQL1.jpeg)
 
   - Desde el pgAdmin o algun motor de base de datos para tirar querys:
-  ![PSQL](img/PSQL2.jpeg)
+    ![PSQL](img/PSQL2.jpeg)
 
 - Luego el proximo paso, una vez conectados es tirar la query para crear la tabla clientes y crear, modificar o eliminar registros a como gusten ....
   ![PSQL](img/PSQL3.jpeg)
@@ -164,24 +164,24 @@ Diseñar un flujo de procesamiento en tiempo real que:
 
 ## 5️⃣ Paso 5: Ver el contenido de logs que contiene el TOPIC de Kafka
 - Para poder ver los datos que se van creando, actualizando y borrando de la tabla CLIENTES en la cola de KAFKA, podriamos realizar lo siguiente desde la terminal:
-```bash
-  docker exec -i kafka kafka-console-consumer \
-    --bootstrap-server localhost:9092 \
-    --topic pgserver1.public.clientes \
-    --from-beginning \
-    --property print.value=true \
-    --property print.key=false \
-  | jq -r '
-    .payload as $p |
-    "🔹 \u001b[1;36mEVENTO ----------------------------\u001b[0m\n" +
-    "🟩 AFTER:    \u001b[32m\($p.after | tostring)\u001b[0m\n" +
-    "🟥 BEFORE:   \u001b[31m\($p.before | tostring)\u001b[0m\n" +
-    "⚙️  OPERACIÓN: \u001b[33m\($p.op)\u001b[0m\n" +
-    "⏱️  TIMESTAMP: \u001b[35m\($p.ts_ms)\u001b[0m\n"
-  '
-```
+  ```bash
+    docker exec -i kafka kafka-console-consumer \
+      --bootstrap-server localhost:9092 \
+      --topic pgserver1.public.clientes \
+      --from-beginning \
+      --property print.value=true \
+      --property print.key=false \
+    | jq -r '
+      .payload as $p |
+      "🔹 \u001b[1;36mEVENTO ----------------------------\u001b[0m\n" +
+      "🟩 AFTER:    \u001b[32m\($p.after | tostring)\u001b[0m\n" +
+      "🟥 BEFORE:   \u001b[31m\($p.before | tostring)\u001b[0m\n" +
+      "⚙️  OPERACIÓN: \u001b[33m\($p.op)\u001b[0m\n" +
+      "⏱️  TIMESTAMP: \u001b[35m\($p.ts_ms)\u001b[0m\n"
+    '
+  ```
 - Luego de ejecutarlo, deberiamos ver algo asi:
-    ![Logs de datos](img/JQ.jpeg)
+  ![Logs de datos](img/JQ.jpeg)
 
 
 ### 📄 Significado del campo `op` en eventos Debezium
@@ -203,12 +203,12 @@ Diseñar un flujo de procesamiento en tiempo real que:
 - La idea es que tener ejecutando ambos procesos de Consumo de datos y Carga de datos en destino final para entender como va funcionando en real time la recarga...
 
 - Primero, instalaremos las libs de Python necesarias para poder ejecutar los archivos .py... Aca dejamos lo que deberiamos ejecutar en la terminal para poder instalarlos:
-```bash
-  pip3 install pandas
-  pip3 install tabulate
-  pip3 install datetime
-  pip3 install confluent_kafka
-```
+  ```bash
+    pip3 install pandas
+    pip3 install tabulate
+    pip3 install datetime
+    pip3 install confluent_kafka
+  ```
 
 - Una vez instalado, deberiamos poder ejecutar estos 2 archivos en terminales distintas para probar los procesos. 
 - Para ejecutar cada uno, debemos estar parados en la carpeta donde tenemos nuestro repositorio clonado y meternos en la carpeta ETL.
@@ -220,15 +220,17 @@ Diseñar un flujo de procesamiento en tiempo real que:
   - Comando 2
   python3 load.py
 ```
+<br>
+
 - Al ejecutar miraremos las siguientes imagenes de terminales, donde se ejecutan ambos procesos en paralelo
   ![Logs de datos](img/Python1.jpeg)
     *Proceso de Consumo de datos de la cola KAFKA*
 
-
+<br><br>
 
   ![Carga final](img/Python2.jpeg)
     *Proceso de Carga de datos en el CSV Final*
-
+<br><br>
 
 - El proceso de ETL-Consumer, veras que carga los datos en un archivo intermedio llamado BUFFER.CSV, donde tendra la siguiente estructura:
   - operacion (operacion a realizar)
@@ -237,10 +239,9 @@ Diseñar un flujo de procesamiento en tiempo real que:
   - email
   - timestamp (tiempo en el que se realizo la operacion en el registro en el origen)
   
-  ![Logs de datos](img/Python3.jpeg)
-
-    *No tiene datos, ya que al consumirlo el proceso LOAD, este queda vacio*
-
+  ![Logs de datos](img/Python3.jpeg)<br>
+  *No tiene datos, ya que al consumirlo el proceso LOAD, este queda vacio*
+<br>
 
 - El proceso de Load, veras que realiza la operacion correspondiente (Carga, Actualizacion o Eliminacion) en los datos en el archivo final llamado DESTINY.CSV, donde tendra la siguiente estructura:
   - id

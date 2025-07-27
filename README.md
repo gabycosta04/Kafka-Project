@@ -209,11 +209,10 @@ Diseñar un flujo de procesamiento en tiempo real que:
   python3 load.py
 ```
 - Al ejecutar miraremos las siguientes imagenes de terminales, donde se ejecutan ambos procesos en paralelo
-![Logs de datos](img/Python1.jpeg)
-*Proceso de Consumo de datos de la cola KAFKA*
-
-![Carga final](img/Python2.jpeg)
-*Proceso de Carga de datos en el CSV Final*
+  ![Logs de datos](img/Python1.jpeg)
+  *Proceso de Consumo de datos de la cola KAFKA*
+  ![Carga final](img/Python2.jpeg)
+  *Proceso de Carga de datos en el CSV Final*
 
 
 - El proceso de ETL-Consumer, veras que carga los datos en un archivo intermedio llamado BUFFER.CSV, donde tendra la siguiente estructura:

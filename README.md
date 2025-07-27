@@ -226,11 +226,11 @@ Diseñar un flujo de procesamiento en tiempo real que:
   ![Logs de datos](img/Python1.jpeg)
     *Proceso de Consumo de datos de la cola KAFKA*
 
-<br><br>
+  <br><br>
 
   ![Carga final](img/Python2.jpeg)
     *Proceso de Carga de datos en el CSV Final*
-<br><br>
+  <br><br>
 
 - El proceso de ETL-Consumer, veras que carga los datos en un archivo intermedio llamado BUFFER.CSV, donde tendra la siguiente estructura:
   - operacion (operacion a realizar)

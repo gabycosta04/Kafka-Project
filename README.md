@@ -23,5 +23,10 @@ Diseñar un flujo de procesamiento en tiempo real que:
    +--------+       +-------------+       +--------+       +--------+       +-----------+
      Fuente         CDC Connector        Mensajería       Consumidor        Almacenamiento
 
+   +--------+       +-------------+       +--------+       +--------+       +-----------+
+   | MySQL  | <---> | Debezium    | <---> | Kafka  | <---> | Python | --->  | CSV final |
+   +--------+       +-------------+       +--------+       +--------+       +-----------+
+     Fuente         CDC Connector        Mensajería       Consumidor        Almacenamiento
 
-![Pipeline de datos](https://debezium.io/documentation/reference/stable/_images/debezium-architecture.png) 
+
+![Arquitectura del pipeline](https://debezium.io/documentation/reference/stable/_images/debezium-architecture.png)

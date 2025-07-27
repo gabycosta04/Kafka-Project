@@ -29,4 +29,9 @@ Diseñar un flujo de procesamiento en tiempo real que:
      Fuente         CDC Connector        Mensajería       Consumidor        Almacenamiento
 ```
 
+<<<<<<< HEAD
 ![Arquitectura del pipeline](img/Arquitectura_de_datos.png)
+=======
+```
+![Arquitectura del pipeline](img/Arquitectura de datos.png)
+>>>>>>> refs/remotes/origin/main

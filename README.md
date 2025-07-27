@@ -24,4 +24,4 @@ Diseñar un flujo de procesamiento en tiempo real que:
      Fuente         CDC Connector        Mensajería       Consumidor        Almacenamiento
 
 
-https://debezium.io/documentation/reference/stable/_images/debezium-architecture.png
+![Pipeline de datos](https://debezium.io/documentation/reference/stable/_images/debezium-architecture.png) 

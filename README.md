@@ -185,3 +185,49 @@ Diseñar un flujo de procesamiento en tiempo real que:
 | `r`  | Read snapshot (lectura inicial)        | `null`              | registro existente cargado desde snapshot inicial |
 
 ```
+
+
+## 5️⃣ Paso 6: Instalar libs de Python y ejecutar los Scripts de consumo de cola y Carga en destino final
+- La idea es que tener ejecutando ambos procesos de Consumo de datos y Carga de datos en destino final para entender como va funcionando en real time la recarga...
+
+- Primero, instalaremos las libs de Python necesarias para poder ejecutar los archivos .py... Aca dejamos lo que deberiamos ejecutar en la terminal para poder instalarlos:
+```bash
+  pip3 install pandas
+  pip3 install tabulate
+  pip3 install datetime
+  pip3 install confluent_kafka
+```
+
+- Una vez instalado, deberiamos poder ejecutar estos 2 archivos en terminales distintas para probar los procesos. 
+- Para ejecutar cada uno, debemos estar parados en la carpeta donde tenemos nuestro repositorio clonado y meternos en la carpeta ETL.
+- Los comandos en las terminales deben ser los siguientes:
+```bash
+  - Comando 1
+  python3 etl-consumer.py
+
+  - Comando 2
+  python3 load.py
+```
+- Al ejecutar miraremos las siguientes imagenes de terminales, donde se ejecutan ambos procesos en paralelo
+![Logs de datos](img/Python1.jpeg)
+*Proceso de Consumo de datos de la cola KAFKA*
+
+![Carga final](img/Python2.jpeg)
+*Proceso de Carga de datos en el CSV Final*
+
+
+- El proceso de ETL-Consumer, veras que carga los datos en un archivo intermedio llamado BUFFER.CSV, donde tendra la siguiente estructura:
+  - operacion (operacion a realizar)
+  - id
+  - nombre
+  - email
+  - timestamp (tiempo en el que se realizo la operacion en el registro en el origen)
+![Logs de datos](img/Python3.jpeg)
+*No tiene datos, ya que al consumirlo el proceso LOAD, este queda vacio*
+
+
+- El proceso de Load, veras que realiza la operacion correspondiente (Carga, Actualizacion o Eliminacion) en los datos en el archivo final llamado DESTINY.CSV, donde tendra la siguiente estructura:
+  - id
+  - nombre
+  - email
+![Carga final](img/Python3.jpeg)

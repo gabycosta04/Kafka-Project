@@ -52,6 +52,10 @@ Diseñar un flujo de procesamiento en tiempo real que:
      docker compose version
 ```
 
+### Postman: Aplicacion que permite probar APIs
+  - 📦 Descargar Postman (Windows/Mac):hhttps://www.postman.com/downloads/
+
+
 ### MySQL: Base de datos origen
   - 📦 Descargar e instalar la version de PSQL (PostgressSQL) desde Mac:
 ```bash
@@ -112,39 +116,40 @@ Diseñar un flujo de procesamiento en tiempo real que:
 ## 3️⃣ Paso 3: Crear tabla y datos en BD Origen.
 - El siguiente paso es conectarnos a nuestra base de datos y tirar consultas, para eso podemos hacerlo de dos formas...
   - Desde la bash, debemos tirar el comando, donde te pedira que ingreses la contraseña:
-```bash
-     psql -h localhost -U postgres -d testdb
-```
+  ```bash
+      psql -h localhost -U postgres -d testdb
+  ```
   ![PSQL](img/PSQL1.jpeg)
 
   - Desde el pgAdmin o algun motor de base de datos para tirar querys:
   ![PSQL](img/PSQL2.jpeg)
 
 - Luego el proximo paso, una vez conectados es tirar la query para crear la tabla clientes y crear, modificar o eliminar registros a como gusten ....
-![PSQL](img/PSQL3.jpeg)
+  ![PSQL](img/PSQL3.jpeg)
 
 - Algo importante antes de avanzar, es importante ver que el wal_level tenga valor LOGICAL, con el comando:
-```bash
-     SHOW WAL_LEVEL
-```
-![PSQL](img/PSQL4.jpeg)
+  ```bash
+      SHOW WAL_LEVEL
+  ```
+  ![PSQL](img/PSQL4.jpeg)
 
 ## 3️⃣ Paso 4: Realizar conexion de Debezium a BD Origen
 - Luego que tengamos inicializado los clientes en nuestra base, debemos crear el conector de Debezium que permite realizar la captura de datos en tiempo real (CDC).
 
 - Desde el POSTMAN, vamos a realizar lo siguiente:
   - Realizar conexion, que luego de ejecutar con tales parametros deberia verse como la siguiente imagen:
-    ```markdown
-    - `Method`: `POST` 
-    - `URL`: `http://localhost:8083/connectors`      
-    - `Headers => Content-Type`: `application/json`
-    - `Body (raw)`: [Conexion realizada](debezium/postgres-connector.json)             
-    ```
+    - `Method`: `POST`  
+    - `URL`: `http://localhost:8083/connectors`  
+    - `Headers => Content-Type`: `application/json`  
+    - `Body (raw)`: [Conexion realizada](debezium/postgres-connector.json)
+
     ![Conexion realizada](img/POSTMAN1.jpeg)
 
   - Verificar que el conector realmente se creo, que luego de ejecutar con tales parametros deberia verse como la siguiente imagen:
-    ```markdown
-    - `Method`: `GET` 
-    - `URL`: `http://localhost:8083/connectors`               
-    ```
+    - `Method`: `GET`  
+    - `URL`: `http://localhost:8083/connectors`  
     ![Conexion realizada](img/POSTMAN2.jpeg)
+
+
+## 3️⃣ Paso 4: Realizar conexion de Debezium a BD Origen
+- Luego que tengamos inicializado los clientes en nuestra base, debemos crear el conector de Debezium que permite realizar la captura de datos en tiempo real (CDC).

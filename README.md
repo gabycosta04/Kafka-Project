@@ -30,6 +30,19 @@ Diseñar un flujo de procesamiento en tiempo real que:
 
 ## ⚙️ Tecnologías utilizadas
 
+
+### GIT: Sistema de versionado para utilizar este repositorio
+  - 📦 Descargar e instalar la version de GIT desde Mac:
+```bash
+     brew install git
+```
+  - 📦 Descargar e instalar la version de GIT desde Windows: https://git-scm.com/download/win 
+  - Para comprobar la version de PostgressSQL y que este instalado:
+```bash
+     git --version
+```
+
+
 ### Docker: Orquestación de contenedores
   - 📦 Descargar Docker Desktop (Windows/Mac):https://www.docker.com/products/docker-desktop/
   - Para comprobar la version de docker y que este instalado:
@@ -70,3 +83,28 @@ Diseñar un flujo de procesamiento en tiempo real que:
 ### Debezium: Conector que permite la captura de datos en tiempo real (CDC) => Servicio levantado por Docker
 ### Apache Kafka: Cola de eventos distribuida => Servicio levantado por Docker
 ### Kafka Connect: Framework para conectar Debezium a Kafka => Servicio levantado por Docker
+
+
+## 1️⃣ Paso 1: Clonar el repositorio con los archivos
+
+- Debemos clonar el repositorio una vez que estemos en nuestra carpeta local deseada para guardar el mismo:
+```bash
+     git clone https://github.com/gabycosta04/Kafka-Project
+```
+
+## 1️⃣ Paso 2: Levantar los servicios a utilizar en Docker
+
+- Una vez tengamos todo instalado y el proyecto clonado en nuestra carpeta deseada, debemos ejecutar la terminal ubicados en esa carpeta y ejecutar el siguiente comando para levantar los archivos
+```bash
+     docker-compose up -d
+```
+
+- Para validar que los servicios esten levantados, podemos realizarlos de 2 formas:
+  - Desde Docker Desktop, donde deberiamos ver algo del siguiente estilo:
+  ![Servicios levantados](img/Docker1.jpeg)
+
+  - Desde la Terminal ejecutando el siguiente comando, donde a partir del mismo deberiamos ver algo asi:
+```bash
+     docker ps
+```
+  ![Servicios levantados](img/Docker2.jpeg)

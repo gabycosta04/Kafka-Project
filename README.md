@@ -26,7 +26,7 @@ Diseñar un flujo de procesamiento en tiempo real que:
 
 ![Arquitectura de datos](img/Arquitectura_de_datos.png)
 
-
+---
 
 ## ⚙️ Tecnologías utilizadas
 
@@ -89,12 +89,18 @@ Diseñar un flujo de procesamiento en tiempo real que:
 ### Kafka Connect: Framework para conectar Debezium a Kafka => Servicio levantado por Docker
 
 
+---
+
 ## 1️⃣ Paso 1: Clonar el repositorio con los archivos
 
 - Debemos clonar el repositorio una vez que estemos en nuestra carpeta local deseada para guardar el mismo:
 ```bash
      git clone https://github.com/gabycosta04/Kafka-Project
 ```
+
+
+---
+
 
 ## 2️⃣ Paso 2: Levantar los servicios a utilizar en Docker
 
@@ -112,6 +118,8 @@ Diseñar un flujo de procesamiento en tiempo real que:
      docker ps
 ```
   ![Servicios levantados](img/Docker2.jpeg)
+
+---
 
 ## 3️⃣ Paso 3: Crear tabla y datos en BD Origen.
 - El siguiente paso es conectarnos a nuestra base de datos y tirar consultas, para eso podemos hacerlo de dos formas...
@@ -133,6 +141,8 @@ Diseñar un flujo de procesamiento en tiempo real que:
   ```
   ![PSQL](img/PSQL4.jpeg)
 
+---
+
 ## 4️⃣ Paso 4: Realizar conexion de Debezium a BD Origen
 - Luego que tengamos inicializado los clientes en nuestra base, debemos crear el conector de Debezium que permite realizar la captura de datos en tiempo real (CDC).
 
@@ -150,6 +160,7 @@ Diseñar un flujo de procesamiento en tiempo real que:
     - `URL`: `http://localhost:8083/connectors`  
     ![Conexion realizada](img/POSTMAN2.jpeg)
 
+---
 
 ## 5️⃣ Paso 5: Ver el contenido de logs que contiene el TOPIC de Kafka
 - Para poder ver los datos que se van creando, actualizando y borrando de la tabla CLIENTES en la cola de KAFKA, podriamos realizar lo siguiente desde la terminal:
@@ -186,6 +197,7 @@ Diseñar un flujo de procesamiento en tiempo real que:
 
 ```
 
+---
 
 ## 5️⃣ Paso 6: Instalar libs de Python y ejecutar los Scripts de consumo de cola y Carga en destino final
 - La idea es que tener ejecutando ambos procesos de Consumo de datos y Carga de datos en destino final para entender como va funcionando en real time la recarga...
@@ -226,6 +238,7 @@ Diseñar un flujo de procesamiento en tiempo real que:
   - timestamp (tiempo en el que se realizo la operacion en el registro en el origen)
   
   ![Logs de datos](img/Python3.jpeg)
+
     *No tiene datos, ya que al consumirlo el proceso LOAD, este queda vacio*
 
 

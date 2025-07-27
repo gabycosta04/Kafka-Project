@@ -210,10 +210,12 @@ Diseñar un flujo de procesamiento en tiempo real que:
 ```
 - Al ejecutar miraremos las siguientes imagenes de terminales, donde se ejecutan ambos procesos en paralelo
   ![Logs de datos](img/Python1.jpeg)
-  *Proceso de Consumo de datos de la cola KAFKA*
+    *Proceso de Consumo de datos de la cola KAFKA*
+
+
 
   ![Carga final](img/Python2.jpeg)
-  *Proceso de Carga de datos en el CSV Final*
+    *Proceso de Carga de datos en el CSV Final*
 
 
 - El proceso de ETL-Consumer, veras que carga los datos en un archivo intermedio llamado BUFFER.CSV, donde tendra la siguiente estructura:
@@ -222,12 +224,14 @@ Diseñar un flujo de procesamiento en tiempo real que:
   - nombre
   - email
   - timestamp (tiempo en el que se realizo la operacion en el registro en el origen)
-![Logs de datos](img/Python3.jpeg)
-*No tiene datos, ya que al consumirlo el proceso LOAD, este queda vacio*
+  
+  ![Logs de datos](img/Python3.jpeg)
+    *No tiene datos, ya que al consumirlo el proceso LOAD, este queda vacio*
 
 
 - El proceso de Load, veras que realiza la operacion correspondiente (Carga, Actualizacion o Eliminacion) en los datos en el archivo final llamado DESTINY.CSV, donde tendra la siguiente estructura:
   - id
   - nombre
   - email
-![Carga final](img/Python3.jpeg)
+
+  ![Carga final](img/Python3.jpeg)

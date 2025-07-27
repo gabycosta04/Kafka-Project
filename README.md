@@ -248,4 +248,4 @@ Diseñar un flujo de procesamiento en tiempo real que:
   - nombre
   - email
 
-  ![Carga final](img/Python3.jpeg)
+  ![Carga final](img/Python4.jpeg)

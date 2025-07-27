@@ -25,3 +25,18 @@ Diseñar un flujo de procesamiento en tiempo real que:
 ```
 
 ![Arquitectura de datos](img/Arquitectura_de_datos.png)
+
+## ⚙️ Tecnologías utilizadas
+- Docker: Orquestación de contenedores
+  - 📦 Descargar Docker Desktop (Windows/Mac):https://www.docker.com/products/docker-desktop/
+  - Para comprobar la version de docker y que este instalado:
+```bash
+     docker --version
+     docker compose version
+```
+- MySQL: Base de datos origen
+- Debezium: Conector que permite la captura de datos en tiempo real (CDC)
+- Apache Kafka: Cola de eventos distribuida
+- Kafka Connect: Framework para conectar Debezium a Kafka
+- Python (utilizando las libs: confluent-kafka, pandas, tabulate): consumidor de eventos provenientes del Kafka y almacenamiento en CSV
+- Shell y jq: Para debug y parseo de eventos por medio de la terminal

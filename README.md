@@ -199,7 +199,7 @@ Diseñar un flujo de procesamiento en tiempo real que:
 
 ---
 
-## 5️⃣ Paso 6: Instalar libs de Python y ejecutar los Scripts de consumo de cola y Carga en destino final
+## 6️⃣ Paso 6: Instalar libs de Python y ejecutar los Scripts de consumo de cola y Carga en destino final
 - La idea es que tener ejecutando ambos procesos de Consumo de datos y Carga de datos en destino final para entender como va funcionando en real time la recarga...
 
 - Primero, instalaremos las libs de Python necesarias para poder ejecutar los archivos .py... Aca dejamos lo que deberiamos ejecutar en la terminal para poder instalarlos:
@@ -249,3 +249,19 @@ Diseñar un flujo de procesamiento en tiempo real que:
   - email
 
   ![Carga final](img/Python4.jpeg)
+
+
+
+---
+
+## 📌 Proximos pasos
+
+- Con todo este procedimiento se logro el objetivo inicial, donde traemos los cambios capturados de los datos en tiempo real de la BD Origen PSQL, hasta el destino (en nuestro caso un simple CSV).
+
+- Pero esto nos sirve si siempre tenemos desplegado los procesos corriendo y que cuando levantemos los servicios, la base destino este siempre vacia (ya que cuando levantamos todo el proceso, nos traemos todos los cambios historicos que vienen del origen)
+
+- Ante esto surge las siguientes casuisticas a trabajar a futuro:
+  - Como traigo datos desde una cierta fecha solamente sin traerme toda la historia
+  - Como traigo datos desde el ultimo registro que exportamos al destino y asi no generar inconsistencias
+  - Como podria registrar cuando se apago el servicio de PSQL y Kafka para saber desde cuando tengo que traer registros una vez que ambos se vuelvan a levantar para mantener el destino consistente.
+  - Como podria enviar datos a otro almacenamiento de datos que no sea un simple CSV

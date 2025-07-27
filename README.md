@@ -133,7 +133,7 @@ Diseñar un flujo de procesamiento en tiempo real que:
   ```
   ![PSQL](img/PSQL4.jpeg)
 
-## 3️⃣ Paso 4: Realizar conexion de Debezium a BD Origen
+## 4️⃣ Paso 4: Realizar conexion de Debezium a BD Origen
 - Luego que tengamos inicializado los clientes en nuestra base, debemos crear el conector de Debezium que permite realizar la captura de datos en tiempo real (CDC).
 
 - Desde el POSTMAN, vamos a realizar lo siguiente:
@@ -151,5 +151,37 @@ Diseñar un flujo de procesamiento en tiempo real que:
     ![Conexion realizada](img/POSTMAN2.jpeg)
 
 
-## 3️⃣ Paso 4: Realizar conexion de Debezium a BD Origen
-- Luego que tengamos inicializado los clientes en nuestra base, debemos crear el conector de Debezium que permite realizar la captura de datos en tiempo real (CDC).
+## 5️⃣ Paso 5: Ver el contenido de logs que contiene el TOPIC de Kafka
+- Para poder ver los datos que se van creando, actualizando y borrando de la tabla CLIENTES en la cola de KAFKA, podriamos realizar lo siguiente desde la terminal:
+```bash
+  docker exec -i kafka kafka-console-consumer \
+    --bootstrap-server localhost:9092 \
+    --topic pgserver1.public.clientes \
+    --from-beginning \
+    --property print.value=true \
+    --property print.key=false \
+  | jq -r '
+    .payload as $p |
+    "🔹 \u001b[1;36mEVENTO ----------------------------\u001b[0m\n" +
+    "🟩 AFTER:    \u001b[32m\($p.after | tostring)\u001b[0m\n" +
+    "🟥 BEFORE:   \u001b[31m\($p.before | tostring)\u001b[0m\n" +
+    "⚙️  OPERACIÓN: \u001b[33m\($p.op)\u001b[0m\n" +
+    "⏱️  TIMESTAMP: \u001b[35m\($p.ts_ms)\u001b[0m\n"
+  '
+```
+- Luego de ejecutarlo, deberiamos ver algo asi:
+    ![Logs de datos](img/JQ.jpeg)
+
+
+### 📄 Significado del campo `op` en eventos Debezium
+
+```plaintext
+
+| `op` | Significado                            | `before`            | `after`                                           |
+|------|----------------------------------------|---------------------|---------------------------------------------------|
+| `c`  | Create (INSERT)                        | `null`              | nuevo registro                                    |
+| `u`  | Update                                 | registro anterior   | registro actualizado                              |
+| `d`  | Delete                                 | registro borrado    | `null`                                            |
+| `r`  | Read snapshot (lectura inicial)        | `null`              | registro existente cargado desde snapshot inicial |
+
+```

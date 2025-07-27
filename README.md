@@ -26,8 +26,11 @@ Diseñar un flujo de procesamiento en tiempo real que:
 
 ![Arquitectura de datos](img/Arquitectura_de_datos.png)
 
+
+
 ## ⚙️ Tecnologías utilizadas
-- Docker: Orquestación de contenedores
+
+### Docker: Orquestación de contenedores
   - 📦 Descargar Docker Desktop (Windows/Mac):https://www.docker.com/products/docker-desktop/
   - Para comprobar la version de docker y que este instalado:
 
@@ -36,7 +39,7 @@ Diseñar un flujo de procesamiento en tiempo real que:
      docker compose version
 ```
 
-- MySQL: Base de datos origen
+### MySQL: Base de datos origen
   - 📦 Descargar e instalar la version de PSQL (PostgressSQL) desde Mac:
 ```bash
      brew install libpq
@@ -47,7 +50,7 @@ Diseñar un flujo de procesamiento en tiempo real que:
      psql --version
 ```
 
-- Python (utilizando las libs: confluent-kafka, pandas, tabulate): consumidor de eventos provenientes del Kafka y almacenamiento en CSV
+### Python (utilizando las libs: confluent-kafka, pandas, tabulate): consumidor de eventos provenientes del Kafka y almacenamiento en CSV
   - 📦 Descargar e instalar Python desde Mac:
 ```bash
      brew install python
@@ -58,12 +61,12 @@ Diseñar un flujo de procesamiento en tiempo real que:
      python --version
 ```
 
-- Shell y jq: Para debug y parseo de eventos por medio de la terminal
+### Shell y jq: Para debug y parseo de eventos por medio de la terminal
   - 📦 Descargar e instalar JQ desde Mac para usar con la terminal:
 ```bash
      brew install jq
 ```
 
-- Debezium: Conector que permite la captura de datos en tiempo real (CDC) => Servicio levantado por Docker
-- Apache Kafka: Cola de eventos distribuida => Servicio levantado por Docker
-- Kafka Connect: Framework para conectar Debezium a Kafka => Servicio levantado por Docker
+### Debezium: Conector que permite la captura de datos en tiempo real (CDC) => Servicio levantado por Docker
+### Apache Kafka: Cola de eventos distribuida => Servicio levantado por Docker
+### Kafka Connect: Framework para conectar Debezium a Kafka => Servicio levantado por Docker
